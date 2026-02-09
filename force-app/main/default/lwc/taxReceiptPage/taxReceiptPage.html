@@ -1,0 +1,69 @@
+<template>
+    <div class="container" if:true={showUI}>
+        <img src={trWfpLogoUrl} alt="WFP Logo" style="width: 40%;height:80%"/>
+        <img src={trSitePageHeaderUrl} alt="Site Page Header" />
+        <div class="details-section">
+            <p style="font-size: 25px; font-family: 'Open Sans', sans-serif;"><b>{taxReceiptRequestPageLabel}</b></p><br/>
+            <template if:true={contactInfo}>
+                <p style="font-family: 'Open Sans', sans-serif;"><b>{welcomeLabel}, {contactInfo.FirstName} {contactInfo.LastName}</b></p>
+                <br/>               
+                <p style="font-family: 'Open Sans', sans-serif;"><b>{wfpSupporterIdLabel} {contactInfo.WFP_Supporter_ID__c}</b></p>
+                <br/>
+                <template if:true={isPreviousLinkExpired}>
+                    <p>
+                        <img src={redErrorIcon} alt="WFP Logo" style="width: 10px;height:10px"/>
+                        <b><font color="red">{linkExpiredLabel}</font></b>                        
+                    </p><br/>
+                    <p>{showExpiredLinkMessage}</p>
+                    <p>{dataSecurityMessage}</p>
+                </template>
+                <template if:false={isPreviousLinkExpired}>
+                    <p>{showMessage}</p>
+                    <p>{dataSecurityMessage}</p>
+                </template>
+                <div class="slds-col slds-size_4-of-12 slds-show_inline-block slds-m-top_x-large">
+                    <lightning-combobox
+                        class="year-combobox"
+                        label={yearDropDownLabel}
+                        value={selectedYear}
+                        options={yearOptions}
+                        onchange={handleYearChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_8-of-12 slds-show_inline-block slds-p-left_large">
+                    <lightning-button class="button_styColor" label={taxReceiptRequesButtonLabel} title="Request Tax Receipt" onclick={handleClick} disabled={showButtonSpinner}></lightning-button>
+                </div>
+                
+                <p if:true={showRequestMessage}>
+                    <br/>
+                    <b>{requestConfirmationMessage} </b>
+                </p>
+            </template>
+            <template if:false={contactInfo}>
+                <p><b>{unauthorizedUserMessage}</b></p>                
+            </template>
+        </div>
+        <div class="footer_CSS">
+            <div class="slds-col slds-size_2-of-12 slds-align_absolute-center">
+                <img class="logo_CSS" src={wfpWhiteLogo} >
+            </div>
+            <div class="slds-col slds-size_8-of-12 slds-align_absolute-center">
+                <span class="social-icon">
+                    <a href={twitterMediaLink} target="_blank" class="nav_link"><img class="icon_CSS" src={twitterLogo} ></a>
+                    <a href={facebookMediaLink} target="_blank" class="nav_link"><img class="icon_CSS" src={facebookLogoWhite} ></a>
+                    <a href={instagramMediaLink} target="_blank" class="nav_link"><img class="icon_CSS" src={instagramLogoWhite} ></a>
+                    <a href={linkedInMediaLink} target="_blank" class="nav_link"><img class="icon_CSS" src={linkedInLogoWhite} ></a>
+                    <a href={youTubeMediaLink} target="_blank" class="nav_link"><img class="icon_CSS" src={youtubeLogoWhite} ></a>
+                    </br></br>
+                    <span> <a href={privateNoticeSiteLink} target="_blank">{privateNotoceMessage}</a></span> 
+                    <span> | <a href={termConditionsLink} target="_blank">{termAndConditionMessage}</a></span>
+                    <span> | <a href={faqLink} target="_blank">{faqLabel}</a></span>
+                </span>
+            </div>
+            <div class="slds-col slds-size_2-of-12 slds-align_absolute-center">
+                <span>Via Cesare Giulio Viola, 68,</br>
+                00148 Rome RM, Italy</span>
+            </div>
+        </div>
+    </div>
+</template>
