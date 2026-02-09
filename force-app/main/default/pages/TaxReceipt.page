@@ -1,0 +1,54 @@
+<apex:page showHeader="false" controller="TaxReceiptController" language="{!language}">
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <title>WFP Tax Receipt</title>
+    <link rel="icon" type="image/x-icon" href="{!$Resource.TaxReceipt_Favicon}"></link>
+  </head>
+  <apex:includeLightning />
+  <div id="LightningComponentid" />
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    $Lightning.use("c:TaxReceiptComp", function () {
+      $Lightning.createComponent("c:taxReceiptContainer",
+        {
+          "details": {
+          },
+          "labels": {
+            "header": "{!JSENCODE($LABEL.TaxReceipt_Header)}",
+            "headerSubText": "{!JSENCODE($LABEL.TaxReceipt_HeaderSubText)}",
+            "donorDetails": "{!JSENCODE($LABEL.TaxReceipt_DonorDetails)}",
+            "name": "{!JSENCODE($LABEL.TaxReceipt_Name)}",
+            "email": "{!JSENCODE($LABEL.TaxReceipt_Email)}",
+            "address": "{!JSENCODE($LABEL.TaxReceipt_address)}",
+            "recurringDonation": "{!JSENCODE($LABEL.TaxReceipt_RecurringDonation)}",
+            "amount": "{!JSENCODE($LABEL.TaxReceipt_Amount)}",
+            "transactionRefNumber": "{!JSENCODE($LABEL.TaxReceipt_TransactionRefNumber)}",
+            "recipentDetails": "{!JSENCODE($LABEL.TaxReceipt_RecipientDetails)}",
+            "netherlandMessage": "{!JSENCODE($LABEL.TaxReceipt_NetherLandMessage)}",
+            "canadaMessage": "{!JSENCODE($LABEL.TaxReceipt_CanadaMessage)}",
+            "wfpAddress": "{!JSENCODE($LABEL.TaxReceipt_WFPAddress)}",
+            "director": "{!JSENCODE($LABEL.TaxReceipt_Director)}",
+            "pvtPartnership": "{!JSENCODE($LABEL.TaxReceipt_PrivatePartnership)}",
+            "wfp": "{!JSENCODE($LABEL.TaxReceipt_wfp)}",
+            "issuanceReceipt": "{!JSENCODE($LABEL.TaxReceipt_IssuanceReceipt)}",
+            "receiptSerialNumber": "{!JSENCODE($LABEL.TaxReceipt_SerialNumber)}",
+            "totalDonations": "{!JSENCODE($LABEL.TaxReceipt_TotalDonation)}",
+            "disabledCountries": "{!JSENCODE($LABEL.TaxReceipt_DisabledCountries)}",
+            "clickHere" : "{!JSENCODE($LABEL.TaxReceipt_Clickhere)}",	
+            "toDownload" : "{!JSENCODE($LABEL.TaxReceipt_ToDownload)}",	
+          }
+        },
+        "LightningComponentid",
+        function (cmp) {
+          console.log('LWC Componenet added in VF page');
+        });
+    });
+    setInterval(() => {
+      if (document.getElementById('auraErrorMessage')) {
+        // document.getElementById('auraErrorMessage').style.display = 'none';
+      }
+    }, 1000);
+  </script>
+</apex:page>
